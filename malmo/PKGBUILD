@@ -5,7 +5,7 @@ pkgdesc='Project Malmö is a platform for Artificial Intelligence experimentatio
 arch=('x86_64')
 url='https://github.com/Microsoft/malmo/blob/master/README.md'
 license=('MIT')
-depends=(jdk8-openjdk swig xsd gradle)
+depends=(jre8-openjdk jdk8-openjdk swig xsd gradle)
 source=(https://github.com/Microsoft/malmo/releases/download/$pkgver/Malmo-$pkgver-Linux-Debian-8.6-64bit_withBoost.zip)
 md5sums=('SKIP')
 
