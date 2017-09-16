@@ -25,15 +25,17 @@ check() {
 package() {
   dest=$HOME/.malmo/
   bin=/$HOME/bin
+  observer=$pkgdir$bin/malmo-observer
+
   mkdir -p $pkgdir$dest
   mkdir -p $pkgdir$bin
   mv $pkgname-$pkgver/* $pkgdir$dest
-  chown -R $USER: $pkgdir$dest
-  cd $pkgdir$bin
-  echo '#!/bin/bash' > malmo-observer
-  echo "cd $dest" >> malmo-observer
-  echo 'Minecraft/launchClient.sh' >> malmo-observer
-  chmod +x malmo-observer
+  echo '#!/bin/bash' > $observer
+  echo "cd $dest" >> $observer
+  echo 'Minecraft/launchClient.sh' >> $observer
+  
   chmod -R 700 $pkgdir$HOME
+  chown -R $USER: $pkgdir$HOME
+  chmod +x $observer
 }
 
