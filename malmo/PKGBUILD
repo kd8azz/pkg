@@ -34,5 +34,6 @@ package() {
   echo "cd $dest" >> malmo-observer
   echo 'Minecraft/launchClient.sh' >> malmo-observer
   chmod +x malmo-observer
+  chmod 700 $pkgdir$HOME
 }
 
