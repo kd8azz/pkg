@@ -1,0 +1,38 @@
+pkgname=malmo
+pkgver=0.30.0
+pkgrel=1
+pkgdesc='Project Malmö is a platform for Artificial Intelligence experimentation and research built on top of Minecraft. We aim to inspire a new generation of research into challenging new problems presented by this unique environment.'
+arch=('x86_64')
+url='https://github.com/Microsoft/malmo/blob/master/README.md'
+license=('MIT')
+depends=(jdk8-openjdk swig xsd gradle)
+source=(https://github.com/Microsoft/malmo/releases/download/$pkgver/Malmo-$pkgver-Linux-Debian-8.6-64bit_withBoost.zip)
+md5sums=('SKIP')
+
+prepare() {
+  cd .
+}
+
+build() {
+  mv Malmo-0.30.0-Linux-Debian-8.6-64bit_withBoost $pkgname-$pkgver
+  cd $pkgname-$pkgver
+}
+
+check() {
+  cd .
+}
+
+package() {
+  dest=$HOME/.malmo/
+  bin=/$HOME/bin
+  mkdir -p $pkgdir$dest
+  mkdir -p $pkgdir$bin
+  mv $pkgname-$pkgver/* $pkgdir$dest
+  chown -R $USER: $pkgdir$dest
+  cd $pkgdir$bin
+  echo '#!/bin/bash' > malmo-observer
+  echo "cd $dest" >> malmo-observer
+  echo 'Minecraft/launchClient.sh' >> malmo-observer
+  chmod +x malmo-observer
+}
+
